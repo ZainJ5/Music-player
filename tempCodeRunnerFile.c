@@ -63,7 +63,7 @@ public:
         else
             cout << "Error while registring new user.Please TRY AGAIN!! ";
     }
-   bool  login(string file){
+    bool  login(string file){
         cout<<"Enter email : ";
         cin>>lemail;
         cout<<"Enter Password : ";
@@ -132,6 +132,127 @@ public:
             cout<<"Invalid Password!!";
         }
     }
+    string getname(void){
+        return name;
+    }
+    int getage(void){
+        return age;
+    }
+     void changepassword(string file,string tempfile){
+    string Srpin;
+    string newpassword;
+    cout << "Enter email : ";
+    cin >> lemail;
+    cout << "Enter Recovery Key : ";
+    cin >> rpin;
+    Srpin = to_string(rpin);
+    // ifstream readfile("D:\\C++\\SpotifyClone.txt");
+    ifstream readfile(file);
+    int recoverykey = 0;
+    while (getline(readfile, checkusername))
+    {
+        if (lemail == checkusername)
+        {
+            checkU = true;
+            break;
+        }
+        recoverykey++;
+    }
+    readfile.seekg(0, ios::beg);
+    recoverykey = recoverykey + 2;
+    for (int i = 0; i <= recoverykey; i++)
+    {
+        getline(readfile, checkpassword);
+        if (i==recoverykey)
+        { 
+        if (Srpin == checkpassword)
+        {
+            checkP = true;
+            break;
+        }
+        }
+    }
+  
+    // ofstream temp("D:\\C++\\temp.txt");
+    ofstream temp(tempfile);
+    readfile.seekg(0, ios::beg);
+    if (!checkU)
+    {
+     cout<<"No User Found"<<endl;
+     return;
+    }
+    if (!checkP)
+    {
+     cout << "Recovery Key Invalid!" << endl;
+     return ; 
+    }
+    
+    if ((checkU) && (checkP))
+    {
+        cout << "Enter New Password : ";
+        cin >> newpassword;
+        recoverykey = recoverykey;
+            int cline = 0;
+            string line;
+            // ifstream readfile("D:\\C++\\SpotifyClone.txt");
+            ifstream readfile(file);
+            while (getline(readfile, line))
+            {
+                cline++;
+                if (cline == recoverykey)
+                {   
+                    temp << newpassword << endl;
+                }
+                else
+                    temp << line << endl;
+            }
+        cout << "Password Successfully Changed!!";
+    }
+    readfile.close();
+    temp.close();
+    // remove("D:\\C++\\SpotifyClone.txt");
+    // rename("D:\\C++\\temp.txt", "D:\\C++\\SpotifyClone.txt");
+    const char *ofile = file.c_str();
+    const char *tfile = tempfile.c_str();
+    remove(ofile);
+    rename(tfile, ofile);
+}
+void deleteaccount(string file,string tempfile){
+// ifstream readfile("D:\\C++\\SpotifyClone.txt");
+// ofstream temp("D:\\C++\\temp.txt");
+ifstream readfile(file);
+ofstream temp(tempfile);
+string dpass;
+cout<<"Enter your password : ";
+cin>>dpass;
+if (!(dpass==lpassword))
+{
+cout<<"Authentication Failed!!"<<endl;
+}
+    cout<<"User authentication successful !!"<<endl;
+    string temp1;
+    cout<<"Account Deleted Successfully"<<endl;
+    int deletestarting=nameline;
+    int deleteending=nameline+6;
+    int lineNumber=1;
+    // cout<<"Delete Starting : "<<deletestarting<<endl;
+    // cout<<"Delete Ending : "<<deleteending<<endl;
+   while (getline(readfile, temp1)) {
+        if (!(lineNumber >= deletestarting && lineNumber <= deleteending)) {
+            temp << temp1 << endl;
+        }
+        lineNumber++; 
+    }
+    readfile.close();
+    temp.close();
+    // remove("D:\\C++\\SpotifyClone.txt");
+    // rename("D:\\C++\\temp.txt", "D:\\C++\\SpotifyClone.txt");
+   const char *oFile = file.c_str();
+   const char *tFile = tempfile.c_str();
+   remove(oFile);
+   rename(tFile, oFile);
+
+}
 };
 
 int main() {

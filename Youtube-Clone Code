@@ -1,7 +1,72 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
+
+class User
+{
+private:
+    string name;
+    int age;
+    string remail;
+    string rpassword;
+    string lemail;
+    string lpassword;
+    string checkusername;
+    string checkpassword;
+    int    emailline;
+    int    nameline;
+    int    rpin;
+    string    totalbill;
+    string subscription;
+    bool   checkU=false;
+    bool   checkP=false;
+friend class Subscription;
+friend void totalbill(User &u1);
+public:
+    User()
+    {
+      totalbill="0$";
+      subscription="Standard Account";
+    }
+    void registration(string file)
+    {
+        cout << "Enter your name : ";
+        cin >> name;
+        cout << "Enter  your age : ";
+        cin >> age;
+        cout << "Enter Email : ";
+        cin >> remail;
+        cout << "Enter  Password : ";
+        cin >> rpassword;
+        cout << "Enter  Recovery 4 digit pin : ";
+        cin >> rpin;
+        // ofstream userdata("D:\\C++\\SpotifyClone.txt",ios::app);
+        ofstream userdata(file,ios::app);
+        if (userdata.is_open())
+        {
+            userdata << name<<endl;
+            userdata << age<<endl;
+            userdata << remail<<endl;
+            userdata << rpassword<<endl;
+            userdata << rpin<<endl;
+            if (file=="D:\\C++\\User's Data.txt")
+            {
+            userdata << subscription<<endl;
+            userdata << totalbill<<endl;
+            }
+            else
+            userdata << 0 <<endl;
+            
+
+            cout << "\nRegistration Successful!!";
+        }
+        else
+            cout << "Error while registring new user.Please TRY AGAIN!! ";
+    }
+};
+
 int main() {
+    //THIS IS CODE TO CLONE YOUTUBE
     int choice;
     cout << "Youtube Clone" << endl;
     cout << "1.) Creator's Studio" << endl;
@@ -100,7 +165,7 @@ int main() {
                                 // Change Subscription Plan 
                                 break;
                             case 15:
-                             Logout 
+                             //Logout 
                                 loggedIn = true;
                                 break;
                             case 16:

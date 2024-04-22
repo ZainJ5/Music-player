@@ -63,7 +63,7 @@ public:
         else
             cout << "Error while registring new user.Please TRY AGAIN!! ";
     }
-   bool  login(string file){
+    bool  login(string file){
         cout<<"Enter email : ";
         cin>>lemail;
         cout<<"Enter Password : ";

@@ -257,6 +257,7 @@ cout<<"Authentication Failed!!"<<endl;
 
 int main() {
     //THIS IS CODE TO CLONE YOUTUBE
+    User u1;
     int choice;
     cout << "Youtube Clone" << endl;
     cout << "1.) Creator's Studio" << endl;

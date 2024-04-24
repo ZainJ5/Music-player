@@ -256,9 +256,10 @@ cout<<"Authentication Failed!!"<<endl;
 };
 
 int main() {
-    //THIS IS CODE TO CLONE YOUTUBE
+    // THIS IS CODE TO CLONE YOUTUBE
     User u1;
     int choice;
+    bool logincheck, clogincheck;
     cout << "Youtube Clone" << endl;
     cout << "1.) Creator's Studio" << endl;
     cout << "2.) User's Screen" << endl;
@@ -287,85 +288,90 @@ int main() {
             switch (Uchoice) {
                 case 1:
                     // Register User 
+                    u1.registration(d);
                     break;
                 case 2:
                     // Login 
-                    int loginChoice;
-                    bool loggedIn = login();   //Login Function will return boolean value for successful login
-                    while (!loggedIn) {
-                        cout << "1.) Play Video" << endl;
-                        cout << "2.) Check Creators" << endl;
-                        cout << "3.) Check Videos of Specific Creator" << endl;
-                        cout << "4.) Recommended Videos" << endl;
-                        cout << "5.) Like a Video" << endl;
-                        cout << "6.) Comment on a Video" << endl;
-                        cout << "7.) Create Playlist" << endl;
-                        cout << "8.) Add Video to Playlist" << endl;
-                        cout << "9.) Remove Video from Playlist" << endl;
-                        cout << "10.) Edit Playlist" << endl;
-                        cout << "11.) Delete Playlist" << endl;
-                        cout << "12.) Check Total Bill" << endl;
-                        cout << "13.) Check Account Type (Subscription Plan)" << endl;
-                        cout << "14.) Change Subscription Plan" << endl;
-                        cout << "15.) Logout" << endl;
-                        cout << "16.) Delete Account" << endl;
-                        cout << "Enter your choice: ";
-                        cin >> loginChoice;
-
-                        switch (loginChoice) {
-                            case 1:
-                                // Play video 
-                                break;
-                            case 2:
-                                // Check Creators 
-                                break;
-                            case 3:
-                                // Check Videos of Specific Creator 
-                                break;
-                            case 4:
-                                // Recommended Videos functionality
-                                break;
-                            case 5:
-                                // Like a Video 
-                                break;
-                            case 6:
-                                // Comment on a Video 
-                                break;
-                            case 7:
-                                // Create Playlist 
-                                break;
-                            case 8:
-                                // Add Video to Playlist 
-                                break;
-                            case 9:
-                                // Remove Video from Playlist 
-                                break;
-                            case 10:
-                                // Edit Playlist 
-                                break;
-                            case 11:
-                                // Delete Playlist 
-                                break;
-                            case 12:
-                                // Check Total Bill 
-                                break;
-                            case 13:
-                                // Check Account Type (Subscription Plan) 
-                                break;
-                            case 14:
-                                // Change Subscription Plan 
-                                break;
-                            case 15:
-                             //Logout 
-                                loggedIn = true;
-                                break;
-                            case 16:
-                                // Delete Account 
-                                break;
-                            default:
-                                cout << "Invalid choice!" << endl;
-                                break;
-                        }
+                    clogincheck = u1.login(d);    // Login Function will return boolean value for successful login
+                    logincheck = u1.login(d);
+                    if (logincheck) {
+                        int age = u1.getage();
+                        login = false;
+                        checking123 = true;
+                        cout << "\t\t Welcome  " << u1.getname() << "!!" << endl;
+                        do {
+                            cout << "1.) Play Video" << endl;
+                            cout << "2.) Check Creators" << endl;
+                            cout << "3.) Check Videos of Specific Creator" << endl;
+                            cout << "4.) Recommended Videos" << endl;
+                            cout << "5.) Like a Video" << endl;
+                            cout << "6.) Comment on a Video" << endl;
+                            cout << "7.) Create Playlist" << endl;
+                            cout << "8.) Add Video to Playlist" << endl;
+                            cout << "9.) Remove Video from Playlist" << endl;
+                            cout << "10.) Edit Playlist" << endl;
+                            cout << "11.) Delete Playlist" << endl;
+                            cout << "12.) Check Total Bill" << endl;
+                            cout << "13.) Check Account Type (Subscription Plan)" << endl;
+                            cout << "14.) Change Subscription Plan" << endl;
+                            cout << "15.) Logout" << endl;
+                            cout << "16.) Delete Account" << endl;
+                            cin >> loginchoice;
+                            switch (loginChoice) {
+                                case 1:
+                                    // Play video 
+                                    break;
+                                case 2:
+                                    // Check Creators 
+                                    break;
+                                case 3:
+                                    // Check Videos of Specific Creator 
+                                    break;
+                                case 4:
+                                    // Recommended Videos functionality
+                                    break;
+                                case 5:
+                                    // Like a Video 
+                                    break;
+                                case 6:
+                                    // Comment on a Video 
+                                    break;
+                                case 7:
+                                    // Create Playlist 
+                                    break;
+                                case 8:
+                                    // Add Video to Playlist 
+                                    break;
+                                case 9:
+                                    // Remove Video from Playlist 
+                                    break;
+                                case 10:
+                                    // Edit Playlist 
+                                    break;
+                                case 11:
+                                    // Delete Playlist 
+                                    break;
+                                case 12:
+                                    // Check Total Bill 
+                                    break;
+                                case 13:
+                                    // Check Account Type (Subscription Plan) 
+                                    break;
+                                case 14:
+                                    // Change Subscription Plan 
+                                    break;
+                                case 15:
+                                    // Logout 
+                                    loggedIn = true;
+                                    break;
+                                case 16:
+                                    // Delete Account 
+                                    break;
+                                default:
+                                    cout << "Invalid choice!" << endl;
+                                    break;
+                            }
+                        } while (checking123);
                     }
                     break;
                 case 3:

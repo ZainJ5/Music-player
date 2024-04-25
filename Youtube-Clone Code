@@ -508,6 +508,7 @@ int main()
                         break;
                     case 12:
                         // Check Total Bill
+                    totalbill(u1);
                         break;
                     case 13:
                         // Check Account Type (Subscription Plan)

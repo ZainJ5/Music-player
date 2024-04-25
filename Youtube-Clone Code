@@ -385,6 +385,25 @@ public:
         rename("D:\\C++\\temp.txt","D:\\C++\\User's Data.txt");
     }
 };
+void totalbill(User &u1){
+ifstream readfile("D:\\C++\\User's Data.txt");
+string line;
+int billline=u1.nameline+5;
+string tbill;
+int count =0;
+cout<<billline<<endl;
+while (getline(readfile,line))
+{
+    if (count==billline)
+    {
+        tbill=line;
+        break;
+    }
+    count++;
+}
+cout<<"Your total bill is : "<<tbill<<endl;
+
+}
 int main()
 {
     // THIS IS CODE TO CLONE YOUTUBE

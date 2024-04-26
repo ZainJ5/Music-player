@@ -519,7 +519,9 @@ int main()
                         break;
                     case 15:
                         // Logout
-                        loggedIn = true;
+                    cout<<"Logout Successful. Good BYE!!"<<endl;
+                    checking123=false;
+                    login=true;
                         break;
                     case 16:
                         // Delete Account

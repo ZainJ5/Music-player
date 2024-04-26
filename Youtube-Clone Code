@@ -523,6 +523,8 @@ int main()
                         break;
                     case 16:
                         // Delete Account
+                    u1.deleteaccount(d,t);
+                    checking123=false;   
                         break;
                     default:
                         cout << "Invalid choice!" << endl;

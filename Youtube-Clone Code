@@ -385,6 +385,85 @@ public:
         rename("D:\\C++\\temp.txt","D:\\C++\\User's Data.txt");
     }
 };
+class VideoPlayer
+{
+    private:
+    string videoname;
+    char *vaddress;
+    int commentno;
+    string comment[3];
+    int likes;
+    static int videonumber;
+    static int counting;
+    string Restriction;
+    string views;
+    string *creators;
+    string *videotitles;
+    int viewline;
+    public:
+    void displayvideo(void){
+        string *temparray = new string [1500];
+    ifstream  entertainment("D:\\C++\\Entertainment.txt");
+    ifstream  education("D:\\C++\\Education.txt");
+    ifstream  gaming("D:\\C++\\Gaming.txt");
+    ifstream  news("D:\\C++\\News and Politics.txt");
+    string video,videotitle;
+    cout<<endl;
+    int i=0;
+    while (getline(entertainment, video)) {
+       if (video.substr(0, 1) == "&") {
+           videotitle=video.substr(1);
+           temparray[i]=videotitle;
+           cout <<i+1<<".) "<< videotitle << endl;
+           i++;
+    }
+}
+  while (getline(education, video)) {
+    if (video.substr(0, 1) == "&") {
+        videotitle=video.substr(1);
+        temparray[i]=videotitle;
+        cout <<i+1<<".) "<< videotitle << endl;
+        i++;
+    }
+}
+  while (getline(gaming, video)) {
+    if (video.substr(0, 1) == "&") {
+        videotitle=video.substr(1);
+        temparray[i]=videotitle;
+        cout <<i+1<<".) "<< videotitle << endl;
+        i++;
+    }
+}
+  while (getline(news, video)) {
+    if (video.substr(0, 1) == "&") {
+        videotitle=video.substr(1);
+        temparray[i]=videotitle;
+        cout <<i+1<<".) "<< videotitle << endl;
+        i++;
+    }
+}   
+    videonumber=i;
+    videotitles = new string[videonumber];
+    for (int i = 0; i < videonumber; i++)
+    {
+        videotitles[i] = temparray[i];
+    }
+    
+    }
+    string VideoName(void) {
+    string videoname;
+    int watch;
+    cout << "Enter the video : ";
+    cin >> watch;
+    if (watch >= 1 && watch <= videonumber) {
+        videoname=videotitles[watch - 1];
+        return  videoname;
+    } else {
+        cout <<endl<<"Invalid input. Please enter a valid number." << endl;
+        return  "";
+    }
+    }
+};
 void totalbill(User &u1){
 ifstream readfile("D:\\C++\\User's Data.txt");
 string line;

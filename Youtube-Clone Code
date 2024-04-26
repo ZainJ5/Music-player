@@ -274,11 +274,13 @@ public:
         }
         cout << "Your subscription is : " << displaysubscription << endl;
     }
+    
 };
 int main()
 {
     // THIS IS CODE TO CLONE YOUTUBE
     User u1;
+    Subscription sub1;
     int choice;
     bool logincheck, clogincheck;
     cout << "Youtube Clone" << endl;
@@ -382,6 +384,7 @@ int main()
                         break;
                     case 13:
                         // Check Account Type (Subscription Plan)
+                     sub1.checkSubscription(u1);
                         break;
                     case 14:
                         // Change Subscription Plan
@@ -392,6 +395,8 @@ int main()
                         break;
                     case 16:
                         // Delete Account
+                    u1.deleteaccount(d,t);
+                    checking123=false;
                         break;
                     default:
                         cout << "Invalid choice!" << endl;

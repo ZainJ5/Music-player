@@ -466,6 +466,137 @@ class VideoPlayer
     }
     }
 };
+ void playvideo(int age,string uvideo) {
+    cout<<endl;
+    ifstream  entertainment("D:\\C++\\Entertainment.txt");
+    ifstream  education("D:\\C++\\Education.txt");
+    ifstream  gaming("D:\\C++\\Gaming.txt");
+    ifstream  news("D:\\C++\\News and Politics.txt");
+    string cvideo="&"+uvideo;
+    string type;
+    bool found = false;
+    int line_number = 0;
+    string search;
+
+    while (getline(education, search)) {
+        line_number++;
+        if (search == cvideo) {
+            found = true;
+            type = "Education";
+            break;
+        }
+    }
+
+    if (!found) {
+        line_number = 0;
+        while (getline(entertainment, search)) {
+            line_number++;
+            if (search == cvideo) {
+                found = true;
+                type = "Entertainment";
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        line_number = 0;
+        while (getline(gaming, search)) {
+            line_number++;
+            if (search == cvideo) {
+                found = true;
+                type = "Gaming";
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        line_number = 0;
+        while (getline(news, search)) {
+            line_number++;
+            if (search == cvideo) {
+                found = true;
+                type = "News and Politics";
+                break;
+            }
+        }
+    }
+    // cout << "Video found in " << type << " category at line " << line_number << endl;
+    const char *videolink;
+    int index = 0;
+    string file;
+    string link;
+    if (type == "Education")
+    {
+        gaming.close();
+        news.close();
+        entertainment.close();
+        education.clear();
+        education.seekg(0, ios::beg);
+        while (getline(education, file))
+        {
+            if (index == line_number + 1)
+            {
+                link = file;
+            }
+             if (index == line_number + 2)
+            {
+                Restriction = file;
+            }
+            if (index == line_number + 3)
+            {
+                views = file;
+            }
+            index++;
+        }    
+        education.clear();
+        education.seekg(0, ios::beg);  
+        int viewcount=stoi(views);
+        viewcount=viewcount+1;
+        string data;
+        ofstream tempfile("D:\\C++\\tempfile.txt");
+        int count = 0;
+        while (getline(education,data)){
+            if (count==line_number+3)
+            {
+                tempfile<<viewcount<<endl;
+            }
+            else{
+             tempfile<<data<<endl;
+            }
+            count++;
+        }
+        tempfile.close();
+        education.close();
+        remove("D:\\C++\\Education.txt");
+        rename("D:\\C++\\tempfile.txt","D:\\C++\\Education.txt");
+    }
+    else if (type == "Gaming")
+    {
+        entertainment.close();
+        education.close();
+        news.close();
+        gaming.clear();
+        gaming.seekg(0, ios::beg);
+        while (getline(gaming, file))
+        {
+            if (index == line_number + 1)
+            {
+                link = file;
+            }
+              if (index == line_number + 2)
+            {
+                Restriction = file;
+            }
+             if (index == line_number + 3)
+            {
+                views = file;
+            }
+            index++;
+        }
+    }
+ };
 void totalbill(User &u1){
 ifstream readfile("D:\\C++\\User's Data.txt");
 string line;

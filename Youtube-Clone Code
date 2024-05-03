@@ -274,8 +274,139 @@ public:
         }
         cout << "Your subscription is : " << displaysubscription << endl;
     }
+
+    void changeSubscription(User &U1)
+    {
+        char choice;
+        sub1 = U1.nameline + 4;
+        bill=sub1+1;
+        ifstream readfile1("D:\\C++\\User's Data.txt");
+        string checksub;
+        int current_line = 0;
+        while (getline(readfile1, checksub))
+        {
+            if (current_line == sub1)
+            {
+                displaysubscription = checksub;
+                break;
+            }
+            current_line++;
+        }
+        cout << "Your subscription is : " << displaysubscription << endl;
+        readfile1.close();
+        cout << "Do you want to change your Subscription (y/n) : ";
+        cin >> choice;
+        if (tolower(choice)=='n')
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice=='Y')||(choice=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+        
+        ifstream readfile("D:\\C++\\User's Data.txt");
+        ofstream temp("D:\\C++\\temp.txt");
+        if (!((readfile.is_open( )) && (temp.is_open())))
+        {
+            cout<<"Error Opening File!!"<<endl;
+            return;
+        }
+        else
+        if(displaysubscription=="Standard Account")
+        { 
+        char choice1;
+        cout<<"Do you want to upgrade your account (Monthly 10$)"<<endl;
+        cout<<"Continue... (y/n) : ";
+        cin>>choice1;
+        if (tolower(choice1)=='n') 
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice1=='Y')||(choice1=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+         current_line=0;
+         cout<<"Account Upgraded Successfully!!"<<endl;
+         readfile.seekg(0, ios::beg);
+         while (getline(readfile,checksub))
+        {
+            if (current_line==sub1)
+            {
+              temp<<"Premium Account"<<endl;
+            }
+            else if (current_line==bill)
+            {
+              temp<<"10$"<<endl;
+            }
+            else{
+            temp<<checksub<<endl;
+            }
+            current_line++;
+        }
+        }
+        if(displaysubscription=="Premium Account"){
+            char choice2;
+         cout<<"Return to free plan (y/n) : ";
+         cin>>choice2;
+         if (tolower(choice2)=='n') 
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice2=='Y')||(choice2=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+         cout<<endl<<"Account Subscription Removed!! "<<endl;
+        current_line=0;
+         readfile.seekg(0, ios::beg);
+         while (getline(readfile,checksub))
+        {
+            if (current_line==sub1)
+            {
+              temp<<"Standard Account"<<endl;
+            }
+            else if (current_line==bill)
+            {
+              temp<<"0$"<<endl;
+            }
+            else{
+                temp<<checksub<<endl;
+            }
+            current_line++;
+        }
+        }
+        temp.close();
+        readfile.close();
+        remove("D:\\C++\\User's Data.txt");
+        rename("D:\\C++\\temp.txt","D:\\C++\\User's Data.txt");
+    }
     
 };
+
+void totalbill(User &u1){
+ifstream readfile("D:\\C++\\User's Data.txt");
+string line;
+int billline=u1.nameline+5;
+string tbill;
+int count =0;
+cout<<billline<<endl;
+while (getline(readfile,line))
+{
+    if (count==billline)
+    {
+        tbill=line;
+        break;
+    }
+    count++;
+}
+cout<<"Your total bill is : "<<tbill<<endl;
+
+}
 int main()
 {
     // THIS IS CODE TO CLONE YOUTUBE
@@ -381,6 +512,7 @@ int main()
                         break;
                     case 12:
                         // Check Total Bill
+                    totalbill(u1);
                         break;
                     case 13:
                         // Check Account Type (Subscription Plan)
@@ -388,6 +520,7 @@ int main()
                         break;
                     case 14:
                         // Change Subscription Plan
+                    sub1.changeSubscription(u1);
                         break;
                     case 15:
                         // Logout

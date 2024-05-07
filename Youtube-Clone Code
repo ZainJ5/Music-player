@@ -1039,18 +1039,12 @@ int main()
     UploadVideo uv2;
     Subscription sub1;
     cout << "Youtube Clone " << endl;
-    cout << "1.) Admin Panel" << endl;
-    cout << "2.) Creator's Studio" << endl;
-    cout << "3.) User's Screen" << endl;
+    cout << "1.) Creator's Studio" << endl;
+    cout << "2.) User's Screen" << endl;
     cout << "Enter your Choice : ";
     cin >> choice;
 
-    if (choice == 1)
-    {
-        cout << "Admin's Panel" << endl;
-        // Code for admin
-    }
-       if (choice == 2)
+       if (choice == 1)
     {
         // Code for Creator
         string vcheck;
@@ -1110,7 +1104,7 @@ int main()
         }
         }
         
-    if (choice == 3)
+   else if (choice == 2)
     { bool login=false;
     do
     {  
@@ -1147,16 +1141,11 @@ int main()
                 cout << "4.) Recommended Videos" << endl;
                 cout << "5.) Like a Video" << endl;
                 cout << "6.) Comment on a Video" << endl;
-                cout << "7.) Create Playlist" << endl;
-                cout << "8.) Add Video to Playlist" << endl;
-                cout << "9.) Remove Video from Playlist" << endl;
-                cout << "10.) Edit Playlist" << endl;
-                cout << "11.) Delete Playlist" << endl;
-                cout << "12.) Check Total Bill" << endl;
-                cout << "13.) Check Account Type (Subscription Plan)" << endl;
-                cout << "14.) Change Subscription Plan" << endl;
-                cout << "15.) Logout" << endl;
-                cout << "16.) Delete Account" << endl;
+                cout << "7.) Check Total Bill" << endl;
+                cout << "8.) Check Account Type (Subscription Plan)" << endl;
+                cout << "9.) Change Subscription Plan" << endl;
+                cout << "10.) Logout" << endl;
+                cout << "11.) Delete Account" << endl;
                 cin >> loginchoice;
 
                 switch (loginchoice)
@@ -1175,8 +1164,15 @@ int main()
                     // Check videos of a Specific Creator
                     vp.checkcreators();
                     name=vp.creatorname();
-                    videotitle=uv2.performance(name);
-                    vp.playvideo(age,videotitle);
+                    if (!name.empty())
+                    {
+                        videotitle=uv2.performance(name);
+                        if (!videotitle.empty())
+                        {
+                        vp.playvideo(age,videotitle);
+                        }
+                        
+                    }
                     // cout<<videotitle<<endl;
                     break;
                 case 4:
@@ -1190,39 +1186,27 @@ int main()
                     break;
                 case 6:
                     // Comment on a Video
+                    vp.displayvideo();
+                    vname=vp.VideoName();
+                    vp.comments(vname);                    
                     break;
                 case 7:
-                    // Create Playlist
-                    break;
-                case 8:
-                    // Add Video to Playlist
-                    break;
-                case 9:
-                    // Remove Video from Playlist
-                    break;
-                case 10:
-                    // Edit Playlist
-                    break;
-                case 11:
-                    // Delete Playlist
-                    break;
-                case 12:
                     // Check Total Bill
                     totalbill(u1);
                     break;
-                case 13:
+                case 8:
                     sub1.checkSubscription(u1);
                     break;
-                case 14:
+                case 9:
                     sub1.changeSubscription(u1);
                     break;
-                case 15:
+                case 10:
                     // Logout
                     cout<<"Logout Successful. Good BYE!!"<<endl;
                     checking123=false;
                     login=true;
                     break;
-                case 16:
+                case 11:
                     u1.deleteaccount(d,t);
                     checking123=false;
                     break;
@@ -1239,6 +1223,8 @@ int main()
         }
     } while (login);
     }
+    else
+      cout <<endl<<"Invalid choice!!.Exiting Program..."<<endl;
     return 0;
 }
 

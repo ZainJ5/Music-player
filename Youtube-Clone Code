@@ -725,6 +725,291 @@ class VideoPlayer
     }
     return "";
  };
+
+ void likevideo(string cvideo,bool check){
+
+    ifstream  entertainment("D:\\C++\\Entertainment.txt");
+    ifstream  education("D:\\C++\\Education.txt");
+    ifstream  gaming("D:\\C++\\Gaming.txt");
+    ifstream  news("D:\\C++\\News and Politics.txt");
+    bool found = false;
+    string type;
+    int line_number = 0;
+    string search,name;
+    name="&"+cvideo;
+    while (getline(education, search)) {
+        line_number++;
+        if (search == name) {
+            found = true;
+            type = "Education";
+            break;
+        }
+    }
+
+    if (!found) {
+        line_number = 0;
+        while (getline(entertainment, search)) {
+            line_number++;
+            if (search == name) {
+                found = true;
+                type = "Entertainment";
+                break;
+            }
+        }
+    }
+    if (!found) {
+        line_number = 0;
+        while (getline(gaming, search)) {
+            line_number++;
+            if (search == name) {
+                found = true;
+                type = "Gaming";
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        line_number = 0;
+        while (getline(news, search)) {
+            line_number++;
+            if (search == name) {
+                found = true;
+                type = "News and Politics";
+                break;
+            }
+        }
+    }
+    // cout<<"Video found in "<<type<<"Categorey in line no : "<<line_number<<endl;
+    int index=0;
+    string likes,file,views;
+    if (type == "Education")
+    {
+        gaming.close();
+        news.close();
+        entertainment.close();
+        education.clear();
+        education.seekg(0, ios::beg);
+        while (getline(education , file))
+        {
+            if (index == line_number + 3)
+            {
+                views = file;
+            }
+            if (index == line_number + 4)
+            {
+                likes = file;
+            }
+            index++;
+        }   
+        if (!check)
+        {
+            double revenue=stoi(views);
+            revenue*=0.01;
+            cout<<"Views on video are : "<<views<<endl;
+            cout<<"Likes on video are : "<<likes<<endl;
+            cout<<"Revenue of video is : "<<revenue<<"$"<<endl;
+        }
+        if (check)
+        {
+        // cout<<likes<<endl;
+        cout<<endl<<"Like Added!!"<<endl;
+        education.clear();
+        education.seekg(0, ios::beg);  
+        int likecount=stoi(likes);
+        likecount = likecount+1;
+        cout<<"Previous : "<<likes<<" Likes"<<endl;
+        cout<<"After    : "<<likecount<<" Likes"<<endl;
+        cout<<endl;
+        string data;
+        ofstream tempfile("D:\\C++\\tempfile.txt");
+        int count = 0;
+        while (getline(education,data)){
+            if (count==line_number+4)
+            {
+                tempfile<<likecount<<endl;
+            }
+            else{
+             tempfile<<data<<endl;
+            }
+            count++;
+        }
+        tempfile.close();
+        education.close();
+        remove("D:\\C++\\Education.txt");
+        rename("D:\\C++\\tempfile.txt","D:\\C++\\Education.txt");
+        }
+    }
+    else if (type == "Gaming")
+    {
+        entertainment.close();
+        education.close();
+        news.close();
+        gaming.clear();
+        gaming.seekg(0, ios::beg);
+        while (getline(gaming, file))
+        {
+            if (index == line_number + 3)
+            {
+                views = file;
+            }
+            if (index == line_number + 4)
+            {
+                likes = file;
+            }
+            index++;
+        }
+        if (!check)
+        {
+            double revenue=stoi(views);
+            revenue*=0.01;
+            cout<<"Views on video are : "<<views<<endl;
+            cout<<"Likes on video are : "<<likes<<endl;
+            cout<<"Revenue of video is : "<<revenue<<"$"<<endl;
+        }
+        if (check)
+        {
+        cout<<endl<<"Like Added!!"<<endl;
+        gaming.clear();
+        gaming.seekg(0, ios::beg);  
+        int likecount=stoi(likes);
+        likecount = likecount+1;
+        cout<<"Previous : "<<likes<<" Likes"<<endl;
+        cout<<"After    : "<<likecount<<" Likes"<<endl;
+        cout<<endl;
+        string data;
+        ofstream tempfile("D:\\C++\\tempfile.txt");
+        int count = 0;
+        while (getline(gaming,data)){
+            if (count==line_number+4)
+            {
+                tempfile<<likecount<<endl;
+            }
+            else{
+             tempfile<<data<<endl;
+            }
+            count++;
+        }
+        tempfile.close();
+        gaming.close();
+        remove("D:\\C++\\Gaming.txt");
+        rename("D:\\C++\\tempfile.txt","D:\\C++\\Gaming.txt");
+    }
+    }
+    else if (type == "Entertainment")
+    {
+        education.close();
+        gaming.close();
+        news.close();
+        entertainment.clear();
+        entertainment.seekg(0, ios::beg);
+        while (getline(entertainment, file))
+        {
+            if (index == line_number + 3)
+            {
+                views = file;
+            }
+            if (index == line_number + 4)
+            {
+                likes = file;
+            }
+            index++;
+        }
+        // cout<<"Video found in entertainment file with likes : "<<likes<<endl;
+        if (!check)
+        {
+            double revenue=stoi(views);
+            revenue*=0.01;
+            cout<<"Views on video are : "<<views<<endl;
+            cout<<"Likes on video are : "<<likes<<endl;
+            cout<<"Revenue of video is : "<<revenue<<"$"<<endl;
+        }
+        if (check)
+        {
+        cout<<endl<<"Like Added!!"<<endl;
+        entertainment.clear();
+        entertainment.seekg(0, ios::beg);  
+        int likecount=stoi(likes);
+        likecount=likecount+1;
+        cout<<"Previous : "<<likes<<" Likes"<<endl;
+        cout<<"After    : "<<likecount<<" Likes"<<endl;
+        cout<<endl;
+        string data;
+        ofstream tempfile("D:\\C++\\tempfile.txt");
+        int count = 0;
+        while (getline(entertainment,data)){
+            if (count==line_number+4)
+            {
+                tempfile<<likecount<<endl;
+            }
+            else{
+             tempfile<<data<<endl;
+            }
+            count++;
+        }
+        tempfile.close();
+        entertainment.close();
+        remove("D:\\C++\\Entertainment.txt");
+        rename("D:\\C++\\tempfile.txt","D:\\C++\\Entertainment.txt");
+    }
+    }
+    else if (type == "News and Politics")
+    {
+        entertainment.close();
+        education.close();
+        gaming.close();
+        news.clear();
+        news.seekg(0, ios::beg);
+        while (getline(news, file))
+        {
+            if (index == line_number + 3)
+            {
+                views = file;
+            }
+            if (index == line_number + 4)
+            {
+                likes = file;
+            }
+            index++;
+        }
+        if (!check)
+        {
+            double revenue=stoi(views);
+            revenue*=0.01;
+            cout<<"Views on video are : "<<views<<endl;
+            cout<<"Likes on video are : "<<likes<<endl;
+            cout<<"Revenue of video is : "<<revenue<<"$"<<endl;
+        }
+        if (check)
+        {
+        cout<<endl<<"Like Added!!"<<endl;
+        news.clear();
+        news.seekg(0, ios::beg);  
+        int likecount=stoi(likes);
+        likecount = likecount+1;
+        cout<<"Previous : "<<likes<<" Likes"<<endl;
+        cout<<"After    : "<<likecount<<" Likes"<<endl;
+        cout<<endl;
+        string data;
+        ofstream tempfile("D:\\C++\\tempfile.txt");
+        int count = 0;
+        while (getline(news,data)){
+            if (count==line_number+4)
+            {
+                tempfile<<likecount<<endl;
+            }
+            else{
+             tempfile<<data<<endl;
+            }
+            count++;
+        }
+        tempfile.close();
+        news.close();
+        remove("D:\\C++\\News and Politics.txt");
+        rename("D:\\C++\\tempfile.txt","D:\\C++\\News and Politics.txt");
+    }
+    }
+    }
 void totalbill(User &u1){
 ifstream readfile("D:\\C++\\User's Data.txt");
 string line;
@@ -821,12 +1106,26 @@ int main()
                         break;
                     case 3:
                         // Check Videos of Specific Creator
+                    vp.checkcreators();
+                    name=vp.creatorname();
+                    if (!name.empty())
+                    {
+                        videotitle=uv2.performance(name);
+                        if (!videotitle.empty())
+                        {
+                        vp.playvideo(age,videotitle);
+                        }
+                        
+                    }
                         break;
                     case 4:
                         // Recommended Videos functionality
                         break;
                     case 5:
                         // Like a Video
+                    vp.displayvideo();
+                    videoname=vp.VideoName();
+                    likevideo(videoname,true);
                         break;
                     case 6:
                         // Comment on a Video

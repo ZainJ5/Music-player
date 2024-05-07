@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>476</width>
+    <height>524</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="Background">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>476</width>
+      <height>481</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>120</y>
+      <width>223</width>
+      <height>243</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 31px;
+border: 2.25px solid #1F6A87;
+background-color: rgba(217, 217, 217, 0.6);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>154</x>
+      <y>181</y>
+      <width>171</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1F6A87;
+    border: 2.25px solid #1F6A87;
+    border-radius: 19px;
+    background-color: rgba(217, 217, 217, 0.4);
+    padding: 1px 11px;
+    padding-left: 15px; 
+}
+
+QPushButton:hover {
+    color: white;
+    background-color: #1F6A87;
+    border: 2.25px solid #1F6A87;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Creator's Login</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>154</x>
+      <y>259</y>
+      <width>171</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1F6A87;
+    border: 2.25px solid #1F6A87;
+    border-radius: 19px;
+    background-color: rgba(217, 217, 217, 0.4);
+    padding: 1px 11px;
+    padding-left: 15px; 
+}
+
+QPushButton:hover {
+    color: white;
+    background-color: #1F6A87;
+    border: 2.25px solid #1F6A87;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>User Login</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YoutubeLogo">
+    <property name="geometry">
+     <rect>
+      <x>129</x>
+      <y>41</y>
+      <width>211</width>
+      <height>48</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>476</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

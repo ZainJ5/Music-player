@@ -1031,147 +1031,216 @@ cout<<"Your total bill is : "<<tbill<<endl;
 }
 int main()
 {
-    // THIS IS CODE TO CLONE YOUTUBE
+    int choice, Uchoice,Cchoice, loginchoice;
+    bool logincheck,clogincheck;
+    bool checking123=true;
+    VideoPlayer vp;
     User u1;
+    UploadVideo uv2;
     Subscription sub1;
-    int choice;
-    bool logincheck, clogincheck;
-    cout << "Youtube Clone" << endl;
-    cout << "1.) Creator's Studio" << endl;
-    cout << "2.) User's Screen" << endl;
-    cout << "Enter your Choice: ";
+    cout << "Youtube Clone " << endl;
+    cout << "1.) Admin Panel" << endl;
+    cout << "2.) Creator's Studio" << endl;
+    cout << "3.) User's Screen" << endl;
+    cout << "Enter your Choice : ";
     cin >> choice;
 
-    switch (choice)
+    if (choice == 1)
     {
-    case 1:
-        // Creator's Studio Menu
+        cout << "Admin's Panel" << endl;
+        // Code for admin
+    }
+       if (choice == 2)
+    {
+        // Code for Creator
+        string vcheck;
+        string d="D:\\C++\\Creator's Data.txt";
+        string t="D:\\C++\\Ctemp.txt";
         cout << "Creators's Screen" << endl;
         cout << "&&-----MENU-----&&" << endl;
         cout << "1.) Register as a Creator" << endl;
         cout << "2.) Login" << endl;
         cout << "3.) Change Password" << endl;
-        break;
-    case 2:
-        // User's Screen Menu
-        int Uchoice;
+        cin >> Cchoice;
+        switch (Cchoice)
+        {
+        case 1:
+            u1.registration(d);
+            break;
+        case 2:
+            clogincheck=u1.login(d);
+            break;
+        case 3:
+            u1.changepassword(d,t);
+            break;
+        default:
+        cout << "Invalid Option!!" << endl;
+            break;
+        }
+        if (clogincheck)
+        {   
+            string name=u1.getname();
+            UploadVideo uv1(name);
+            cout<<endl<<"Creator's Dashboard !! ";
+            cout<<"Welcome "<<name<<endl;
+            cout<<"1.) Upload Video"<<endl;
+            cout<<"2.) Check Revenue"<<endl;
+            cout<<"3.) Check Performance"<<endl;
+            int pchoice;
+            cout<<"Enter Your Choice : ";
+            cin>>pchoice;
+            switch(pchoice)
+            {
+                case 1: 
+                    // u1.uploadvideo();
+                uv1.uploadvideo();
+                break;
+                case 2:
+                    // u1.revenue();
+                break;
+                case 3: 
+                cout<<endl;
+                vcheck=uv1.performance(name);
+                // cout<<vcheck<<endl;
+                likevideo(vcheck,false);
+                cout<<endl;
+                break;
+                default:cout<<"Invalid Option!!\n";
+            }
+        }
+        }
+        
+    if (choice == 3)
+    { bool login=false;
+    do
+    {  
+       string d="D:\\C++\\User's Data.txt";
+       string t="D:\\C++\\temp.txt";
+       string name,vname,videoname;
+       string videotitle;
         cout << "User Panel" << endl;
         cout << "&&-----MENU-----&&" << endl;
         cout << "1.) Register User" << endl;
         cout << "2.) Login" << endl;
         cout << "3.) Change Password" << endl;
+
         cin >> Uchoice;
 
         switch (Uchoice)
         {
         case 1:
-            // Register User
             u1.registration(d);
             break;
         case 2:
-            // Login
-            clogincheck = u1.login(d); // Login Function will return boolean value for successful login
             logincheck = u1.login(d);
             if (logincheck)
             {
-                int age = u1.getage();
-                login = false;
-                checking123 = true;
-                cout << "\t\t Welcome  " << u1.getname() << "!!" << endl;
-                do
+                int age=u1.getage();
+                login=false;
+                checking123=true;
+                cout<<"\t\t Welcome  "<<u1.getname( )<<"!!"<<endl;
+            do
+            { 
+                cout << "1.) Play Video" << endl;
+                cout << "2.) Check Creators" << endl;
+                cout << "3.) Check Videos of Specific Creator" << endl;
+                cout << "4.) Recommended Videos" << endl;
+                cout << "5.) Like a Video" << endl;
+                cout << "6.) Comment on a Video" << endl;
+                cout << "7.) Create Playlist" << endl;
+                cout << "8.) Add Video to Playlist" << endl;
+                cout << "9.) Remove Video from Playlist" << endl;
+                cout << "10.) Edit Playlist" << endl;
+                cout << "11.) Delete Playlist" << endl;
+                cout << "12.) Check Total Bill" << endl;
+                cout << "13.) Check Account Type (Subscription Plan)" << endl;
+                cout << "14.) Change Subscription Plan" << endl;
+                cout << "15.) Logout" << endl;
+                cout << "16.) Delete Account" << endl;
+                cin >> loginchoice;
+
+                switch (loginchoice)
                 {
-                    cout << "1.) Play Video" << endl;
-                    cout << "2.) Check Creators" << endl;
-                    cout << "3.) Check Videos of Specific Creator" << endl;
-                    cout << "4.) Recommended Videos" << endl;
-                    cout << "5.) Like a Video" << endl;
-                    cout << "6.) Comment on a Video" << endl;
-                    cout << "7.) Check Total Bill" << endl;
-                    cout << "8.) Check Account Type (Subscription Plan)" << endl;
-                    cout << "9.) Change Subscription Plan" << endl;
-                    cout << "10.) Logout" << endl;
-                    cout << "11.) Delete Account" << endl;
-                    cin >> loginchoice;
-                    switch (loginChoice)
-                    {
-                    case 1:
-                        // Play video
-                     vp.displayvideo();
+                case 1:
+                    // Play video
+                    vp.displayvideo();
                     vname=vp.VideoName();
                     vp.playvideo(age,vname);
-                        break;
-                    case 2:
-                        // Check Creators
-                        vp.checkcreators();
-                        break;
-                    case 3:
-                        // Check Videos of Specific Creator
+                    break;
+                case 2:
+                    // Check Artists
+                    vp.checkcreators();
+                    break;
+                case 3:
+                    // Check videos of a Specific Creator
                     vp.checkcreators();
                     name=vp.creatorname();
-                    if (!name.empty())
-                    {
-                        videotitle=uv2.performance(name);
-                        if (!videotitle.empty())
-                        {
-                        vp.playvideo(age,videotitle);
-                        }
-                        
-                    }
-                        break;
-                    case 4:
-                        // Recommended Videos functionality
-                        break;
-                    case 5:
-                        // Like a Video
+                    videotitle=uv2.performance(name);
+                    vp.playvideo(age,videotitle);
+                    // cout<<videotitle<<endl;
+                    break;
+                case 4:
+                    // Recommend Video
+                    break;
+                case 5:
+                    // Like a Video
                     vp.displayvideo();
                     videoname=vp.VideoName();
                     likevideo(videoname,true);
-                        break;
-                    case 6:
-                        // Comment on a Video
-                        break;
-                    case 7:
-                        // Check Total Bill
+                    break;
+                case 6:
+                    // Comment on a Video
+                    break;
+                case 7:
+                    // Create Playlist
+                    break;
+                case 8:
+                    // Add Video to Playlist
+                    break;
+                case 9:
+                    // Remove Video from Playlist
+                    break;
+                case 10:
+                    // Edit Playlist
+                    break;
+                case 11:
+                    // Delete Playlist
+                    break;
+                case 12:
+                    // Check Total Bill
                     totalbill(u1);
-                        break;
-                    case 8:
-                        // Check Account Type (Subscription Plan)
-                     sub1.checkSubscription(u1);
-                        break;
-                    case 9:
-                        // Change Subscription Plan
+                    break;
+                case 13:
+                    sub1.checkSubscription(u1);
+                    break;
+                case 14:
                     sub1.changeSubscription(u1);
-                        break;
-                    case 10:
-                        // Logout
+                    break;
+                case 15:
+                    // Logout
                     cout<<"Logout Successful. Good BYE!!"<<endl;
                     checking123=false;
                     login=true;
-                        break;
-                    case 11:
-                        // Delete Account
+                    break;
+                case 16:
                     u1.deleteaccount(d,t);
-                    checking123=false;   
-                        break;
-                    default:
-                        cout << "Invalid choice!" << endl;
-                        break;
-                    }
-                } while (checking123);
+                    checking123=false;
+                    break;
+                default:
+                    cout << "INVALID CHOICE!!";
+                    break;
+                }
+            } while (checking123);
             }
             break;
         case 3:
-            // Change Password functionality
-            u1.changepassword(d, t);
-            break;
-        default:
-            cout << "Invalid choice!" << endl;
+            u1.changepassword(d,t);
             break;
         }
-        break;
-    default:
-        cout << "Invalid choice!! Exiting Program..." << endl;
-        break;
+    } while (login);
     }
+    // else
+    //   cout <<endl<<"Invalid choice!!.Exiting Program..."<<endl;
     return 0;
 }
+

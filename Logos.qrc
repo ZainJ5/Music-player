@@ -1,0 +1,65 @@
+<RCC>
+    <qresource prefix="/Creator's Logo">
+        <file>Logo's/Creator's Logo/Background.png</file>
+        <file>Logo's/Creator's Logo/Delete.png</file>
+        <file>Logo's/Creator's Logo/Login Photo.png</file>
+        <file>Logo's/Creator's Logo/Logout.png</file>
+        <file>Logo's/Creator's Logo/Performance.png</file>
+        <file>Logo's/Creator's Logo/Revenue.png</file>
+        <file>Logo's/Creator's Logo/Upload Logo.png</file>
+        <file>Logo's/Creator's Logo/Upload page photo.png</file>
+        <file>Logo's/Creator's Logo/Youtube Creator.png</file>
+        <file>Logo's/Creator's Logo/createrforgetpassword.png</file>
+    </qresource>
+    <qresource prefix="/User Logo">
+        <file>Logo's/main window/create playlist.png</file>
+        <file>Logo's/main window/create.png</file>
+        <file>Logo's/main window/delete account.png</file>
+        <file>Logo's/main window/home.png</file>
+        <file>Logo's/main window/logouut.png</file>
+        <file>Logo's/main window/more users.png</file>
+        <file>Logo's/main window/premium user[with banda].png</file>
+        <file>Logo's/main window/profile.png</file>
+        <file>Logo's/main window/recomended.png</file>
+        <file>Logo's/main window/search.png</file>
+        <file>Logo's/main window/total bill.png</file>
+        <file>Logo's/main window/trending.png</file>
+        <file>Logo's/main window/upgrade to premium.png</file>
+        <file>Logo's/main window/youtube.png</file>
+        <file>Logo's/main window/subscription.png</file>
+    </qresource>
+    <qresource prefix="/Registration">
+        <file>Logo's/registration/Age.png</file>
+        <file>Logo's/registration/Email.png</file>
+        <file>Logo's/registration/Login Photo.png</file>
+        <file>Logo's/registration/Password.png</file>
+        <file>Logo's/registration/Recovery Key.png</file>
+        <file>Logo's/registration/Register.png</file>
+        <file>Logo's/registration/Username.png</file>
+        <file>Logo's/registration/Youtube logo.png</file>
+        <file>Logo's/registration/Youtube logo-1.png</file>
+    </qresource>
+    <qresource prefix="/Login">
+        <file>Logo's/login/enter email.png</file>
+        <file>Logo's/login/Login Banda.png</file>
+        <file>Logo's/login/password.png</file>
+        <file>Logo's/login/Oeye.png</file>
+        <file>Logo's/login/Ceye.png</file>
+    </qresource>
+    <qresource prefix="/Forgot Password">
+        <file>Logo's/forgot password/confirm password.png</file>
+        <file>Logo's/forgot password/forrgot password[ banda].png</file>
+        <file>Logo's/forgot password/new password.png</file>
+        <file>Logo's/forgot password/recovery key.png</file>
+    </qresource>
+    <qresource prefix="/First Window">
+        <file>Logo's/First Window/Background.png</file>
+        <file>Logo's/First Window/Youtube Logo.png</file>
+        <file>Logo's/MediaPlayer/PlayButton.png</file>
+        <file>Logo's/MediaPlayer/ForwardButton.png</file>
+        <file>Logo's/MediaPlayer/PreviousButton - Copy.png</file>
+        <file>Logo's/MediaPlayer/pausebutton.png</file>
+        <file>Logo's/MediaPlayer/like clicked.png</file>
+        <file>Logo's/MediaPlayer/like.png</file>
+    </qresource>
+</RCC>

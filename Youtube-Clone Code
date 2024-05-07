@@ -811,9 +811,13 @@ int main()
                     {
                     case 1:
                         // Play video
+                     vp.displayvideo();
+                    vname=vp.VideoName();
+                    vp.playvideo(age,vname);
                         break;
                     case 2:
                         // Check Creators
+                        vp.checkcreators();
                         break;
                     case 3:
                         // Check Videos of Specific Creator

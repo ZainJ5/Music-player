@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <windows.h>
 using namespace std;
-
 class User
 {
 private:
@@ -12,21 +14,20 @@ private:
     string lpassword;
     string checkusername;
     string checkpassword;
-    int emailline;
-    int nameline;
-    int rpin;
-    string totalbill;
+    int    emailline;
+    int    nameline;
+    int    rpin;
+    string    totalbill;
     string subscription;
-    bool checkU = false;
-    bool checkP = false;
-    friend class Subscription;
-    friend void totalbill(User &u1);
-
+    bool   checkU=false;
+    bool   checkP=false;
+friend class Subscription;
+friend void totalbill(User &u1);
 public:
     User()
     {
-        totalbill = "0$";
-        subscription = "Standard Account";
+      totalbill="0$";
+      subscription="Standard Account";
     }
     void registration(string file)
     {
@@ -40,352 +41,475 @@ public:
         cin >> rpassword;
         cout << "Enter  Recovery 4 digit pin : ";
         cin >> rpin;
-        ofstream userdata(file, ios::app);
+        // ofstream userdata("D:\\C++\\SpotifyClone.txt",ios::app);
+        ofstream userdata(file,ios::app);
         if (userdata.is_open())
         {
-            userdata << name << endl;
-            userdata << age << endl;
-            userdata << remail << endl;
-            userdata << rpassword << endl;
-            userdata << rpin << endl;
-            if (file == "D:\\C++\\User's Data.txt")
+            userdata << name<<endl;
+            userdata << age<<endl;
+            userdata << remail<<endl;
+            userdata << rpassword<<endl;
+            userdata << rpin<<endl;
+            if (file=="D:\\C++\\User's Data.txt")
             {
-                userdata << subscription << endl;
-                userdata << totalbill << endl;
+            userdata << subscription<<endl;
+            userdata << totalbill<<endl;
             }
             else
-                userdata << 0 << endl;
+            userdata << 0 <<endl;
+            
 
             cout << "\nRegistration Successful!!";
         }
         else
             cout << "Error while registring new user.Please TRY AGAIN!! ";
     }
-    bool login(string file)
-    {
-        cout << "Enter email : ";
-        cin >> lemail;
-        cout << "Enter Password : ";
-        cin >> lpassword;
+    bool  login(string file){
+        cout<<"Enter email : ";
+        cin>>lemail;
+        cout<<"Enter Password : ";
+        cin>>lpassword;
+        // ifstream readfile("D:\\C++\\SpotifyClone.txt");
         ifstream readfile(file);
-        int line_number = 0;
-        while (getline(readfile, checkusername))
+        int line_number=0;
+        while (getline(readfile,checkusername))
         {
-            if (lemail == checkusername)
+            if (lemail==checkusername)
             {
-                checkU = true;
+                checkU=true;
                 break;
             }
             line_number++;
         }
-        emailline = line_number;
+        emailline=line_number;
         line_number++;
-        int currentline = 0;
+        int currentline=0;
         readfile.seekg(0, ios::beg);
         if (checkU)
         {
-            while (getline(readfile, checkpassword))
+            while (getline(readfile,checkpassword))
             {
-                if (currentline == line_number)
+                if (currentline==line_number)
                 {
-                    if (lpassword == checkpassword)
+                    if (lpassword==checkpassword)
                     {
-                        checkP = true;
-                    }
+                    checkP=true;
+                    } 
                 }
                 currentline++;
+                
             }
         }
         readfile.clear();
-        readfile.seekg(0, ios::beg);
-        line_number = line_number - 2;
-        nameline = line_number;
-        currentline = 1;
+        readfile .seekg(0, ios::beg);
+        line_number=line_number-2;
+       nameline =line_number;
+        // cout<<line_number;
+        currentline=1;
         string cname;
-        while (getline(readfile, cname))
+        while (getline(readfile,cname))
         {
-            if (currentline == line_number)
+            if (currentline==line_number)
             {
-                name = cname;
+                name=cname;
             }
-            if (currentline == line_number + 1)
+            if (currentline==line_number+1)
             {
-                string sage = cname;
-                age = stoi(sage);
+                string sage=cname;
+                age=stoi(sage);
             }
-
+            
             currentline++;
-        }
-        if ((checkU) && (checkP))
+        } 
+        if ((checkU)  && (checkP))
         {
-            cout << "Login Successfull!!" << endl;
+            cout<<"Login Successfull!!"<<endl;
             return true;
         }
-        else if (!checkU)
-        {
-            cout << "User Not Found!!";
+        else if(!checkU){
+            cout<<"User Not Found!!";
         }
-        else
-        {
-            cout << "Invalid Password!!";
+        else {
+            cout<<"Invalid Password!!";
         }
     }
-    string getname(void)
-    {
+    string getname(void){
         return name;
     }
-    int getage(void)
-    {
+    int getage(void){
         return age;
     }
-    void changepassword(string file, string tempfile)
+     void changepassword(string file,string tempfile){
+    string Srpin;
+    string newpassword;
+    cout << "Enter email : ";
+    cin >> lemail;
+    cout << "Enter Recovery Key : ";
+    cin >> rpin;
+    Srpin = to_string(rpin);
+    // ifstream readfile("D:\\C++\\SpotifyClone.txt");
+    ifstream readfile(file);
+    int recoverykey = 0;
+    while (getline(readfile, checkusername))
     {
-        string Srpin;
-        string newpassword;
-        cout << "Enter email : ";
-        cin >> lemail;
-        cout << "Enter Recovery Key : ";
-        cin >> rpin;
-        Srpin = to_string(rpin);
-        ifstream readfile(file);
-        int recoverykey = 0;
-        while (getline(readfile, checkusername))
+        if (lemail == checkusername)
         {
-            if (lemail == checkusername)
-            {
-                checkU = true;
-                break;
-            }
-            recoverykey++;
+            checkU = true;
+            break;
         }
-        readfile.seekg(0, ios::beg);
-        recoverykey = recoverykey + 2;
-        for (int i = 0; i <= recoverykey; i++)
+        recoverykey++;
+    }
+    readfile.seekg(0, ios::beg);
+    recoverykey = recoverykey + 2;
+    for (int i = 0; i <= recoverykey; i++)
+    {
+        getline(readfile, checkpassword);
+        if (i==recoverykey)
+        { 
+        if (Srpin == checkpassword)
         {
-            getline(readfile, checkpassword);
-            if (i == recoverykey)
-            {
-                if (Srpin == checkpassword)
-                {
-                    checkP = true;
-                    break;
-                }
-            }
+            checkP = true;
+            break;
         }
-
-        ofstream temp(tempfile);
-        readfile.seekg(0, ios::beg);
-        if (!checkU)
-        {
-            cout << "No User Found" << endl;
-            return;
         }
-        if (!checkP)
-        {
-            cout << "Recovery Key Invalid!" << endl;
-            return;
-        }
-
-        if ((checkU) && (checkP))
-        {
-            cout << "Enter New Password : ";
-            cin >> newpassword;
-            recoverykey = recoverykey;
+    }
+  
+    // ofstream temp("D:\\C++\\temp.txt");
+    ofstream temp(tempfile);
+    readfile.seekg(0, ios::beg);
+    if (!checkU)
+    {
+     cout<<"No User Found"<<endl;
+     return;
+    }
+    if (!checkP)
+    {
+     cout << "Recovery Key Invalid!" << endl;
+     return ; 
+    }
+    
+    if ((checkU) && (checkP))
+    {
+        cout << "Enter New Password : ";
+        cin >> newpassword;
+        recoverykey = recoverykey;
             int cline = 0;
             string line;
+            // ifstream readfile("D:\\C++\\SpotifyClone.txt");
             ifstream readfile(file);
             while (getline(readfile, line))
             {
                 cline++;
                 if (cline == recoverykey)
-                {
+                {   
                     temp << newpassword << endl;
                 }
                 else
                     temp << line << endl;
             }
-            cout << "Password Successfully Changed!!";
-        }
-        readfile.close();
-        temp.close();
-        const char *ofile = file.c_str();
-        const char *tfile = tempfile.c_str();
-        remove(ofile);
-        rename(tfile, ofile);
+        cout << "Password Successfully Changed!!";
     }
-    void deleteaccount(string file, string tempfile)
-    {
-        ifstream readfile(file);
-        ofstream temp(tempfile);
-        string dpass;
-        cout << "Enter your password : ";
-        cin >> dpass;
-        if (!(dpass == lpassword))
-        {
-            cout << "Authentication Failed!!" << endl;
-        }
-        cout << "User authentication successful !!" << endl;
-        string temp1;
-        cout << "Account Deleted Successfully" << endl;
-        int deletestarting = nameline;
-        int deleteending = nameline + 6;
-        int lineNumber = 1;
-        // cout<<"Delete Starting : "<<deletestarting<<endl;
-        // cout<<"Delete Ending : "<<deleteending<<endl;
-        while (getline(readfile, temp1))
-        {
-            if (!(lineNumber >= deletestarting && lineNumber <= deleteending))
-            {
-                temp << temp1 << endl;
-            }
-            lineNumber++;
-        }
-        readfile.close();
-        temp.close();
-        // remove("D:\\C++\\SpotifyClone.txt");
-        // rename("D:\\C++\\temp.txt", "D:\\C++\\SpotifyClone.txt");
-        const char *oFile = file.c_str();
-        const char *tFile = tempfile.c_str();
-        remove(oFile);
-        rename(tFile, oFile);
-    }
-};
-class Subscription
+    readfile.close();
+    temp.close();
+    // remove("D:\\C++\\SpotifyClone.txt");
+    // rename("D:\\C++\\temp.txt", "D:\\C++\\SpotifyClone.txt");
+    const char *ofile = file.c_str();
+    const char *tfile = tempfile.c_str();
+    remove(ofile);
+    rename(tfile, ofile);
+}
+void deleteaccount(string file,string tempfile){
+// ifstream readfile("D:\\C++\\SpotifyClone.txt");
+// ofstream temp("D:\\C++\\temp.txt");
+ifstream readfile(file);
+ofstream temp(tempfile);
+string dpass;
+cout<<"Enter your password : ";
+cin>>dpass;
+if (!(dpass==lpassword))
 {
+cout<<"Authentication Failed!!"<<endl;
+}
+    cout<<"User authentication successful !!"<<endl;
+    string temp1;
+    cout<<"Account Deleted Successfully"<<endl;
+    int deletestarting=nameline;
+    int deleteending=nameline+6;
+    int lineNumber=1;
+    // cout<<"Delete Starting : "<<deletestarting<<endl;
+    // cout<<"Delete Ending : "<<deleteending<<endl;
+   while (getline(readfile, temp1)) {
+        if (!(lineNumber >= deletestarting && lineNumber <= deleteending)) {
+            temp << temp1 << endl;
+        }
+        lineNumber++; 
+    }
+    readfile.close();
+    temp.close();
+    // remove("D:\\C++\\SpotifyClone.txt");
+    // rename("D:\\C++\\temp.txt", "D:\\C++\\SpotifyClone.txt");
+   const char *oFile = file.c_str();
+   const char *tFile = tempfile.c_str();
+   remove(oFile);
+   rename(tFile, oFile);
+
+}
+};
+class UploadVideo{
 private:
-    int sub1;
-    string displaysubscription;
-    int bill;
+string videotitle;
+string videolink;
+string description;
+string agerestriction;
+int revenue;
+string creatorname;
+string category;
+int likes;
+int views;
+int comments;
 public:
+UploadVideo(){
 
-    void checkSubscription(User &U1){
-        sub1 = U1.nameline + 4;
-        ifstream readfile("D:\\C++\\User's Data.txt");
-        string checksub;
-        int current_line = 0;
-        while (getline(readfile, checksub))
-        {
-            if (current_line == sub1)
-            {
-                displaysubscription = checksub;
-                break;
-            }
-            current_line++;
-        }
-        cout << "Your subscription is : " << displaysubscription << endl;
-    }
-
-    void changeSubscription(User &U1)
+}
+UploadVideo(string name){
+likes=0;
+comments=0;
+creatorname=name;
+views=0;
+}
+void uploadvideo(void){
+    int choice;
+    int choice12;
+    cout<<"Enter the video title : ";
+    cin.ignore();
+    getline(cin,videotitle);
+    cout<<"Write Description : ";
+    getline(cin,description);
+    cout<<"Add Video Link : ";
+    getline(cin,videolink);
+    cout<<endl<<" Choose Category"<<endl;
+    cout<<"1.) Entertainment"<<endl;
+    cout<<"2.) Education"<<endl;
+    cout<<"3.) Gaming"<<endl;
+    cout<<"4.) News and Politics"<<endl;
+    cin>>choice;
+    switch (choice)
     {
-        char choice;
-        sub1 = U1.nameline + 4;
-        bill=sub1+1;
-        ifstream readfile1("D:\\C++\\User's Data.txt");
-        string checksub;
-        int current_line = 0;
-        while (getline(readfile1, checksub))
-        {
-            if (current_line == sub1)
-            {
-                displaysubscription = checksub;
-                break;
-            }
-            current_line++;
-        }
-        cout << "Your subscription is : " << displaysubscription << endl;
-        readfile1.close();
-        cout << "Do you want to change your Subscription (y/n) : ";
-        cin >> choice;
-        if (tolower(choice)=='n')
-        {
-            cout<<"Subscription not changed!!"<<endl;
-            return;
-        }
-        else if(!((choice=='Y')||(choice=='y'))){
-            cout<<"INVALID INPUT!!"<<endl;
-            return;
-        }
-        
-        ifstream readfile("D:\\C++\\User's Data.txt");
-        ofstream temp("D:\\C++\\temp.txt");
-        if (!((readfile.is_open( )) && (temp.is_open())))
-        {
-            cout<<"Error Opening File!!"<<endl;
-            return;
-        }
-        else
-        if(displaysubscription=="Standard Account")
-        { 
-        char choice1;
-        cout<<"Do you want to upgrade your account (Monthly 10$)"<<endl;
-        cout<<"Continue... (y/n) : ";
-        cin>>choice1;
-        if (tolower(choice1)=='n') 
-        {
-            cout<<"Subscription not changed!!"<<endl;
-            return;
-        }
-        else if(!((choice1=='Y')||(choice1=='y'))){
-            cout<<"INVALID INPUT!!"<<endl;
-            return;
-        }
-         current_line=0;
-         cout<<"Account Upgraded Successfully!!"<<endl;
-         readfile.seekg(0, ios::beg);
-         while (getline(readfile,checksub))
-        {
-            if (current_line==sub1)
-            {
-              temp<<"Premium Account"<<endl;
-            }
-            else if (current_line==bill)
-            {
-              temp<<"10$"<<endl;
-            }
-            else{
-            temp<<checksub<<endl;
-            }
-            current_line++;
-        }
-        }
-        if(displaysubscription=="Premium Account"){
-            char choice2;
-         cout<<"Return to free plan (y/n) : ";
-         cin>>choice2;
-         if (tolower(choice2)=='n') 
-        {
-            cout<<"Subscription not changed!!"<<endl;
-            return;
-        }
-        else if(!((choice2=='Y')||(choice2=='y'))){
-            cout<<"INVALID INPUT!!"<<endl;
-            return;
-        }
-         cout<<endl<<"Account Subscription Removed!! "<<endl;
-        current_line=0;
-         readfile.seekg(0, ios::beg);
-         while (getline(readfile,checksub))
-        {
-            if (current_line==sub1)
-            {
-              temp<<"Standard Account"<<endl;
-            }
-            else if (current_line==bill)
-            {
-              temp<<"0$"<<endl;
-            }
-            else{
-                temp<<checksub<<endl;
-            }
-            current_line++;
-        }
-        }
-        temp.close();
-        readfile.close();
-        remove("D:\\C++\\User's Data.txt");
-        rename("D:\\C++\\temp.txt","D:\\C++\\User's Data.txt");
+    case 1:
+        category="Entertainment";
+        break;
+    case 2:
+        category="Education";
+        break;
+    case 3:
+        category="Gaming";
+        break;
+    case 4:
+        category="News and Politics";
+        break;
+    default:
+    cout<<"Invalid Input"<<endl;
+        break;
     }
-    
+    cout<<"Is this video Age Reistricted : "<<endl;
+    cout<<"1.) Yes"<<endl;
+    cout<<"2.) No"<<endl;
+    cin>>choice12;
+    if(choice12==1)
+    {
+        agerestriction="Restricted";        
+    }
+    else if (choice12==2)
+    {
+        agerestriction="Not Restricted";        
+    }
+    else
+    cout<<"Invalid Input"<<endl;
+    fstream uploaddata("D:\\C++\\" + category + ".txt",ios::app);
+    if (uploaddata.is_open())
+    {  
+        uploaddata<<creatorname<<endl;
+        uploaddata<<"&";
+        uploaddata<<videotitle<<endl;
+        uploaddata<<description<<endl;
+        uploaddata<<videolink<<endl;
+        uploaddata<<agerestriction<<endl;
+        uploaddata<<views<<endl;
+        uploaddata<<likes<<endl;
+        cout<<"Video Successfully uploaded!!"<<endl;
+    }
+    else{
+    cout<<"Error!! Video unable to upload"<<endl;
+    }
+}
+string performance(string name){
+bool Novideo=false;
+string *temparray;
+string *uservideos;
+ifstream  entertainment("D:\\C++\\Entertainment.txt");
+ifstream  education("D:\\C++\\Education.txt");
+ifstream  gaming("D:\\C++\\Gaming.txt");
+ifstream  news("D:\\C++\\News and Politics.txt");
+string line;
+temparray=new string [1500];
+bool check=false;
+int linenum=0;
+int count=0;
+while (getline(entertainment, line))
+{
+    linenum++;
+    if (line==name)
+    {
+        check=true;
+        break;
+    }
+}
+entertainment.clear();
+entertainment.seekg(0,ios::beg);
+int index=0;
+if (check)
+{
+    while (getline(entertainment,line))
+    {
+        index++;
+        if ((index==linenum+1)&&(line.substr(0,1)=="&"))
+        {
+            string videotitle=line.substr(1);
+            temparray[count]=videotitle;
+            cout<<count+1<<".) "<<videotitle<<endl;
+            count++;
+            Novideo=true;
+        }
+    }
+}
+check=false;
+linenum=0;
+while (getline(education, line))
+{
+    linenum++;
+    if (line==name)
+    {
+        check=true;
+        break;
+    }
+}
+education.clear();
+education.seekg(0,ios::beg);
+index=0;
+if (check)
+{
+    while (getline(education,line))
+    {
+        index++;
+        if ((index==linenum+1)&&(line.substr(0,1)=="&"))
+        {
+            string videotitle=line.substr(1);
+            temparray[count]=videotitle;
+            cout<<count+1<<".) "<<videotitle<<endl;
+            count++;
+            Novideo=true;
+        }
+    }
+}
+check=false;
+linenum=0;
+while (getline(gaming, line))
+{
+    linenum++;
+    if (line==name)
+    {
+        check=true;
+        break;
+    }
+}
+gaming.clear();
+gaming.seekg(0,ios::beg);
+index=0;
+if (check)
+{
+    while (getline(gaming,line))
+    {
+        index++;
+        if ((index==linenum+1)&&(line.substr(0,1)=="&"))
+        {
+            string videotitle=line.substr(1);
+            temparray[count]=videotitle;
+            cout<<count+1<<".) "<<videotitle<<endl;
+            count++;
+            Novideo=true;
+        }
+    }
+}
+check=false;
+linenum=0;
+while (getline(entertainment, line))
+{
+    linenum++;
+    if (line==name)
+    {
+        check=true;
+        break;
+    }
+}
+news.clear();
+news.seekg(0,ios::beg);
+index=0;
+if (check)
+{
+    while (getline (news,line))
+    {
+        index++;
+        if ((index==linenum+1)&&(line.substr(0,1)=="&"))
+        {
+            string videotitle=line.substr(1);
+            temparray[count]=videotitle;
+            cout<<count+1<<".) "<<videotitle<<endl;
+            count++;
+            Novideo=true;
+        }
+    }
+}
+if (!Novideo)
+{
+   cout<<endl<<"No Video Found!!"<<endl<<endl;
+   return "";
+}
+
+uservideos = new string[count];
+for (int i = 0; i < count; i++)
+{
+    uservideos[i]=temparray[i];
+}
+delete [] temparray;
+entertainment.close();
+education.close();
+news.close();
+gaming.close();
+int num;
+cout<<"Enter the video : ";
+cin>>num;
+if ((num>=1)&&(num<=count))
+{
+    string video = uservideos[num-1];
+    return video;
+}
+else{
+    cout<<endl<<"Invalid Input"<<endl;
+    return " ";
+}
+
+// string video= uservideos[num-1];
+// return video;
+// cout<<"Selected video is : "<<video<<endl;
+}
+string specificcreator(void){
+    int i;
+    cout<<"Enter video title : ";
+    cin>>i;
+    string name;
+    name=videotitle[i-1];
+    return name;
+}
 };
 class VideoPlayer
 {
@@ -465,8 +589,7 @@ class VideoPlayer
         return  "";
     }
     }
-};
- void playvideo(int age,string uvideo) {
+    void playvideo(int age,string uvideo) {
     cout<<endl;
     ifstream  entertainment("D:\\C++\\Entertainment.txt");
     ifstream  education("D:\\C++\\Education.txt");
@@ -723,10 +846,270 @@ class VideoPlayer
         videolink=link.c_str();
         ShellExecuteA(NULL, "open", videolink, NULL, NULL, SW_MINIMIZE);
     }
+}
+void checkcreators(void){
+    string *temparray=new string [1500];
+    ifstream creatordata("D:\\C++\\Creator's Data.txt");
+    string cname;
+    int line_number= 0;
+    int currentline=0;
+    cout<<endl;
+    int count=0;
+    cout<<"\t   All Creator's List"<<endl;
+    while (getline(creatordata,cname))
+    {
+        if (currentline == line_number)
+        {
+            cout<<count+1<<".) "<<cname<<endl;
+            temparray[count]=cname;
+            line_number+=6;
+            count++;
+        }
+        currentline ++;
+    }
+    counting = count;
+    cout<<endl;
+    creators = new string [counting];
+    for (int i = 0; i < counting; i++)
+    {
+       creators [i] = temparray [i];
+    }
+    
+}
+string creatorname(void){
+   int i;
+   string name;
+   cout<<"Enter creators name whose video you want to watch : ";
+   cin>>i;
+   if ((i>=1)&&(i<=counting))
+   {
+      name=creators[i-1];
+      return name;
+   }
+   else{
+    cout<<endl<<"Invalid Input!!"<<endl<<endl;
     return "";
- };
+   }
 
- void likevideo(string cvideo,bool check){
+}
+void comments (string videoname){
+    ifstream comments("D:\\C++\\Comments.txt");
+    string line;
+    int count=0;
+    int skip=0,lineread=0;
+    do
+    {
+    bool check=false;
+    int linenumber=0;
+    while (lineread < skip && getline(comments, line)) {
+        lineread++;
+    }
+    
+
+    while (getline(comments,line))
+    {
+        if (videoname==line)
+        {
+            check=true;
+            break;
+        }
+        linenumber++;
+    }
+    comments.clear();
+    comments.seekg(0,ios::beg);
+    if (check)
+    {
+        int num=0;
+        while (getline(comments,line))
+    {
+        if (num==linenumber+1)
+        {   
+            if (count==3)
+            {
+                break;
+            }
+            else{
+            comment[count] = line;
+            count++;
+            }
+        }
+        num++;
+    }
+    }
+    comments.clear();
+    comments.seekg(0,ios::beg);
+    skip=skip+2;
+    }while (!comments.eof() && count < 3);
+    cout<<endl<<"Top Comments Are"<<endl;
+        for (int i = 0; i < count; i++)
+        {
+        cout<<comment[i]<<endl;
+        }
+    
+
+    
+}
+};
+int VideoPlayer::counting = 0;
+int VideoPlayer::videonumber = 0;
+
+class Subscription
+{
+private:
+    int sub1;
+    string displaysubscription;
+    int bill;
+public:
+
+    void checkSubscription(User &U1){
+        sub1 = U1.nameline + 4;
+        ifstream readfile("D:\\C++\\User's Data.txt");
+        string checksub;
+        int current_line = 0;
+        while (getline(readfile, checksub))
+        {
+            if (current_line == sub1)
+            {
+                displaysubscription = checksub;
+                break;
+            }
+            current_line++;
+        }
+        cout << "Your subscription is : " << displaysubscription << endl;
+    }
+    void changeSubscription(User &U1)
+    {
+        char choice;
+        sub1 = U1.nameline + 4;
+        bill=sub1+1;
+        ifstream readfile1("D:\\C++\\User's Data.txt");
+        string checksub;
+        int current_line = 0;
+        while (getline(readfile1, checksub))
+        {
+            if (current_line == sub1)
+            {
+                displaysubscription = checksub;
+                break;
+            }
+            current_line++;
+        }
+        cout << "Your subscription is : " << displaysubscription << endl;
+        readfile1.close();
+        cout << "Do you want to change your Subscription (y/n) : ";
+        cin >> choice;
+        if (tolower(choice)=='n')
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice=='Y')||(choice=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+        
+        ifstream readfile("D:\\C++\\User's Data.txt");
+        ofstream temp("D:\\C++\\temp.txt");
+        if (!((readfile.is_open( )) && (temp.is_open())))
+        {
+            cout<<"Error Opening File!!"<<endl;
+            return;
+        }
+        else
+        if(displaysubscription=="Standard Account")
+        { 
+        char choice1;
+        cout<<"Do you want to upgrade your account (Monthly 10$)"<<endl;
+        cout<<"Continue... (y/n) : ";
+        cin>>choice1;
+        if (tolower(choice1)=='n') 
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice1=='Y')||(choice1=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+         current_line=0;
+         cout<<"Account Upgraded Successfully!!"<<endl;
+         readfile.seekg(0, ios::beg);
+         while (getline(readfile,checksub))
+        {
+            if (current_line==sub1)
+            {
+              temp<<"Premium Account"<<endl;
+            }
+            else if (current_line==bill)
+            {
+              temp<<"10$"<<endl;
+            }
+            else{
+            temp<<checksub<<endl;
+            }
+            current_line++;
+        }
+        }
+        if(displaysubscription=="Premium Account"){
+            char choice2;
+         cout<<"Return to free plan (y/n) : ";
+         cin>>choice2;
+         if (tolower(choice2)=='n') 
+        {
+            cout<<"Subscription not changed!!"<<endl;
+            return;
+        }
+        else if(!((choice2=='Y')||(choice2=='y'))){
+            cout<<"INVALID INPUT!!"<<endl;
+            return;
+        }
+         cout<<endl<<"Account Subscription Removed!! "<<endl;
+        current_line=0;
+         readfile.seekg(0, ios::beg);
+         while (getline(readfile,checksub))
+        {
+            if (current_line==sub1)
+            {
+              temp<<"Standard Account"<<endl;
+            }
+            else if (current_line==bill)
+            {
+              temp<<"0$"<<endl;
+            }
+            else{
+                temp<<checksub<<endl;
+            }
+            current_line++;
+        }
+        }
+        temp.close();
+        readfile.close();
+        remove("D:\\C++\\User's Data.txt");
+        rename("D:\\C++\\temp.txt","D:\\C++\\User's Data.txt");
+    }
+};
+
+void totalbill(User &u1){
+ifstream readfile("D:\\C++\\User's Data.txt");
+string line;
+int billline=u1.nameline+5;
+string tbill;
+int count =0;
+cout<<billline<<endl;
+while (getline(readfile,line))
+{
+    if (count==billline)
+    {
+        tbill=line;
+        break;
+    }
+    count++;
+}
+cout<<"Your total bill is : "<<tbill<<endl;
+
+}
+
+void likevideo(string cvideo,bool check){
 
     ifstream  entertainment("D:\\C++\\Entertainment.txt");
     ifstream  education("D:\\C++\\Education.txt");
@@ -1010,25 +1393,6 @@ class VideoPlayer
     }
     }
     }
-void totalbill(User &u1){
-ifstream readfile("D:\\C++\\User's Data.txt");
-string line;
-int billline=u1.nameline+5;
-string tbill;
-int count =0;
-cout<<billline<<endl;
-while (getline(readfile,line))
-{
-    if (count==billline)
-    {
-        tbill=line;
-        break;
-    }
-    count++;
-}
-cout<<"Your total bill is : "<<tbill<<endl;
-
-}
 int main()
 {
     int choice, Uchoice,Cchoice, loginchoice;
